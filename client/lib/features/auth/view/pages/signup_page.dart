@@ -1,7 +1,10 @@
+import 'package:client/constants/assets_constants.dart';
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:client/features/auth/view/widgets/email_username_textfield.dart';
 import 'package:client/features/auth/view/widgets/password_textfield.dart';
 import 'package:client/features/auth/view/widgets/signup_button.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -18,6 +21,8 @@ class _SignupPageState extends State<SignupPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _scrollController = ScrollController();
+  final _passwordFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -32,17 +37,66 @@ class _SignupPageState extends State<SignupPage> {
         });
       },
     );
+
+    _passwordFocusNode.addListener(() {
+      if (_passwordFocusNode.hasFocus) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _scrollController.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        backgroundColor: AppPallete.blackColor,
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                AssetsConstants.appIcon,
+                width: 70,
+                height: 70,
+              ),
+              const Text(
+                'Harmoniq',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lovelace',
+                  fontSize: 22,
+                ),
+              )
+            ],
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: ListView(
+          child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 80,
+              height: 60,
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25),
@@ -56,7 +110,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             const SizedBox(
-              height: 80,
+              height: 60,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25),
@@ -155,6 +209,7 @@ class _SignupPageState extends State<SignupPage> {
               padding: const EdgeInsets.only(left: 25, right: 25),
               child: Passwordtextfield(
                 controller: _passwordController,
+                focusNode: _passwordFocusNode,
                 text: 'Your Password',
               ),
             ),
@@ -189,9 +244,40 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Already have an account?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppPallete.whiteColor,
+                    fontFamily: 'Gilroy',
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' Login',
+                      style: TextStyle(
+                        color: AppPallete.pinkColor,
+                        fontSize: 16,
+                      ),
+                      // recognizer: TapGestureRecognizer()
+                      //   ..onTap = () {
+                      //     Navigator.pushReplacement(
+                      //       context,
+                      //       LoginView.route(),
+                      //     );
+                      //   },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

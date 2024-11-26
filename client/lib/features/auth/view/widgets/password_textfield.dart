@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 
 class Passwordtextfield extends StatefulWidget {
   final TextEditingController controller;
+  final FocusNode focusNode;
   final String text;
   const Passwordtextfield({
     super.key,
     required this.controller,
     required this.text,
+    required this.focusNode,
   });
 
   @override
@@ -28,6 +30,7 @@ class _PasswordtextfieldState extends State<Passwordtextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: widget.focusNode,
       obscureText: _obscureText,
       controller: widget.controller,
       keyboardType: TextInputType.visiblePassword,
@@ -63,10 +66,12 @@ class _PasswordtextfieldState extends State<Passwordtextfield> {
                 },
                 icon: _obscureText
                     ? const ImageIcon(
-                        AssetImage('assets/images/eyeIconClosed.png'),
+                        AssetImage('assets/images/eyeIconOpen.png'),
+                        color: AppPallete.whiteGreyColor,
                       )
                     : const ImageIcon(
-                        AssetImage('assets/images/eyeIconOpen.png'),
+                        AssetImage('assets/images/eyeIconClosed.png'),
+                        color: AppPallete.whiteGreyColor,
                       ),
               )
             : null,

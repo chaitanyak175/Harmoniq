@@ -87,6 +87,11 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: fonts/Gilroy-Medium.ttf
+
+    
+    - family: Lovelace
+      fonts:
+        - asset: fonts/Lovelace-Italic.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

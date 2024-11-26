@@ -23,7 +23,10 @@ class SignupButton extends StatelessWidget {
       },
       style: ButtonStyle(
         shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
         backgroundColor: const WidgetStatePropertyAll(AppPallete.pinkColor),
         // overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         // shadowColor: const WidgetStatePropertyAll(Colors.transparent),

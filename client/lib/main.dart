@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:client/features/auth/view/pages/signup_page.dart';
-import 'package:client/core/theme/app_theme.dart';
+import 'package:client/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
