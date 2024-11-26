@@ -1,20 +1,20 @@
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 
-class Emailpasswordtextfield extends StatefulWidget {
+class EmailUsernameTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String text;
-  const Emailpasswordtextfield({
+  const EmailUsernameTextfield({
     super.key,
     required this.controller,
     required this.text,
   });
 
   @override
-  State<Emailpasswordtextfield> createState() => _EmailpasswordtextfieldState();
+  State<EmailUsernameTextfield> createState() => _EmailUsernameTextfieldState();
 }
 
-class _EmailpasswordtextfieldState extends State<Emailpasswordtextfield> {
+class _EmailUsernameTextfieldState extends State<EmailUsernameTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -22,6 +22,7 @@ class _EmailpasswordtextfieldState extends State<Emailpasswordtextfield> {
       keyboardType: TextInputType.text,
       style: const TextStyle(
         color: AppPallete.whiteColor,
+        fontFamily: 'Gilroy',
       ),
       onTapOutside: (PointerDownEvent event) {
         FocusManager.instance.primaryFocus?.unfocus();

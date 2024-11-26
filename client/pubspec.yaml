@@ -82,13 +82,9 @@ flutter:
     - family: Nothing
       fonts:
         - asset: fonts/Nothing.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
     - family: Gilroy
       fonts:
         - asset: fonts/Gilroy-Medium.ttf
-
-    
     - family: Lovelace
       fonts:
         - asset: fonts/Lovelace-Italic.ttf

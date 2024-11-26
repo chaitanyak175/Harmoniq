@@ -36,6 +36,7 @@ class _PasswordtextfieldState extends State<Passwordtextfield> {
       keyboardType: TextInputType.visiblePassword,
       style: const TextStyle(
         color: AppPallete.whiteColor,
+        fontFamily: 'Gilroy',
       ),
       onChanged: (value) {
         setState(() {

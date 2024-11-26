@@ -3,8 +3,6 @@ import 'package:client/core/theme/app_pallete.dart';
 import 'package:client/features/auth/view/widgets/email_username_textfield.dart';
 import 'package:client/features/auth/view/widgets/password_textfield.dart';
 import 'package:client/features/auth/view/widgets/signup_button.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -138,7 +136,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
-              child: Emailpasswordtextfield(
+              child: EmailUsernameTextfield(
                 controller: _nameController,
                 text: 'Your Username',
               ),
@@ -173,7 +171,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
-              child: Emailpasswordtextfield(
+              child: EmailUsernameTextfield(
                 controller: _emailController,
                 text: 'hello@company.com',
               ),
@@ -231,7 +229,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             const SizedBox(
-              height: 130,
+              height: 120,
             ),
             Center(
               child: SizedBox(
