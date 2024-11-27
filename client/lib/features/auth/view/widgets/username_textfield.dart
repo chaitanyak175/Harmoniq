@@ -1,25 +1,32 @@
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 
-class EmailUsernameTextfield extends StatefulWidget {
+class UsernameTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String text;
-  const EmailUsernameTextfield({
+  const UsernameTextfield({
     super.key,
     required this.controller,
     required this.text,
   });
 
   @override
-  State<EmailUsernameTextfield> createState() => _EmailUsernameTextfieldState();
+  State<UsernameTextfield> createState() => _UsernameTextfieldState();
 }
 
-class _EmailUsernameTextfieldState extends State<EmailUsernameTextfield> {
+class _UsernameTextfieldState extends State<UsernameTextfield> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value!.trim().isEmpty) {
+          return "Name is missing!";
+        }
+        return null;
+      },
       controller: widget.controller,
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.name,
+      textCapitalization: TextCapitalization.words,
       style: const TextStyle(
         color: AppPallete.whiteColor,
         fontFamily: 'Gilroy',

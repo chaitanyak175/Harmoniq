@@ -29,7 +29,13 @@ class _PasswordtextfieldState extends State<Passwordtextfield> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value!.trim().isEmpty) {
+          return "Password is missing!";
+        }
+        return null;
+      },
       focusNode: widget.focusNode,
       obscureText: _obscureText,
       controller: widget.controller,

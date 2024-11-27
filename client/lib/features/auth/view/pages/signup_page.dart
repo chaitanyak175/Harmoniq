@@ -1,11 +1,15 @@
 import 'package:client/constants/assets_constants.dart';
 import 'package:client/core/theme/app_pallete.dart';
-import 'package:client/features/auth/view/widgets/email_username_textfield.dart';
+import 'package:client/features/auth/view/pages/login_page.dart';
+import 'package:client/features/auth/view/widgets/email_textfield.dart';
 import 'package:client/features/auth/view/widgets/password_textfield.dart';
 import 'package:client/features/auth/view/widgets/signup_button.dart';
+import 'package:client/features/auth/view/widgets/username_textfield.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
+  static route() => MaterialPageRoute(builder: (context) => const SignupPage());
   const SignupPage({super.key});
 
   @override
@@ -21,6 +25,7 @@ class _SignupPageState extends State<SignupPage> {
   final _passwordController = TextEditingController();
   final _scrollController = ScrollController();
   final _passwordFocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -90,100 +95,67 @@ class _SignupPageState extends State<SignupPage> {
       body: SafeArea(
           child: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 60,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 25),
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontFamily: 'Nothing',
-                  color: Colors.white,
-                  fontSize: 40,
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 60,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontFamily: 'Nothing',
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: RichText(
-                text: const TextSpan(
-                    text: 'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Gilroy',
-                      fontSize: 15,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: '*',
-                        style: TextStyle(
-                          color: AppPallete.pinkColor,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ]),
+              const SizedBox(
+                height: 60,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: EmailUsernameTextfield(
-                controller: _nameController,
-                text: 'Your Username',
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: RichText(
-                text: const TextSpan(
-                  text: 'Email',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Gilroy',
-                    fontSize: 15,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: '*',
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: RichText(
+                  text: const TextSpan(
+                      text: 'Name',
                       style: TextStyle(
-                        color: AppPallete.pinkColor,
+                        color: Colors.white,
+                        fontFamily: 'Gilroy',
                         fontSize: 15,
                       ),
-                    ),
-                  ],
+                      children: [
+                        TextSpan(
+                          text: '*',
+                          style: TextStyle(
+                            color: AppPallete.pinkColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ]),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: EmailUsernameTextfield(
-                controller: _emailController,
-                text: 'hello@company.com',
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: RichText(
-                text: const TextSpan(
-                    text: 'Password',
+              Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                child: UsernameTextfield(
+                  controller: _nameController,
+                  text: 'Your Username',
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: RichText(
+                  text: const TextSpan(
+                    text: 'Email',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Gilroy',
@@ -197,83 +169,119 @@ class _SignupPageState extends State<SignupPage> {
                           fontSize: 15,
                         ),
                       ),
-                    ]),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: Passwordtextfield(
-                controller: _passwordController,
-                focusNode: _passwordFocusNode,
-                text: 'Your Password',
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: SizedBox(
-                height: 25,
-                child: passwordErrorMessage != null
-                    ? Text(
-                        passwordErrorMessage!,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 181, 57, 48),
-                          fontFamily: 'Gilroy',
-                        ),
-                      )
-                    : null,
-              ),
-            ),
-            const SizedBox(
-              height: 120,
-            ),
-            Center(
-              child: SizedBox(
-                width: 365,
-                height: 50,
-                child: SignupButton(
-                  buttonText: 'Sign up',
-                  onPressed: () {},
-                  isLoading: isLoading,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: RichText(
-                text: const TextSpan(
-                  text: 'Already have an account?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppPallete.whiteColor,
-                    fontFamily: 'Gilroy',
+                    ],
                   ),
-                  children: [
-                    TextSpan(
-                      text: ' Login',
-                      style: TextStyle(
-                        color: AppPallete.pinkColor,
-                        fontSize: 16,
-                      ),
-                      // recognizer: TapGestureRecognizer()
-                      //   ..onTap = () {
-                      //     Navigator.pushReplacement(
-                      //       context,
-                      //       LoginView.route(),
-                      //     );
-                      //   },
-                    ),
-                  ],
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                child: EmailTextfield(
+                  controller: _emailController,
+                  text: 'hello@company.com',
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: RichText(
+                  text: const TextSpan(
+                      text: 'Password',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Gilroy',
+                        fontSize: 15,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '*',
+                          style: TextStyle(
+                            color: AppPallete.pinkColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                child: Passwordtextfield(
+                  controller: _passwordController,
+                  focusNode: _passwordFocusNode,
+                  text: 'Your Password',
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: SizedBox(
+                  height: 25,
+                  child: passwordErrorMessage != null
+                      ? Text(
+                          passwordErrorMessage!,
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 181, 57, 48),
+                            fontFamily: 'Gilroy',
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+              const SizedBox(
+                height: 120,
+              ),
+              Center(
+                child: SizedBox(
+                  width: 365,
+                  height: 50,
+                  child: SignupButton(
+                    buttonText: 'Sign up',
+                    onPressed: () {},
+                    isLoading: isLoading,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account?',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppPallete.whiteColor,
+                      fontFamily: 'Gilroy',
+                    ),
+                    children: [
+                      TextSpan(
+                        text: ' Log In',
+                        style: const TextStyle(
+                          color: AppPallete.pinkColor,
+                          fontSize: 16,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushReplacement(
+                              context,
+                              LoginPage.route(),
+                            );
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       )),
     );
